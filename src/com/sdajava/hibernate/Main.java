@@ -1,21 +1,35 @@
-package com.sdajava.hibernate.test;
+package com.sdajava.hibernate;
 
-import com.sdajava.hibernate.implement.UserDAOImpl;
-import com.sdajava.hibernate.model.User;
+import com.sdajava.hibernate.implement.BookDAOImpl;
+import com.sdajava.hibernate.model.Book;
 
-public class HibernateTest {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+public class Main {
 
 	public static void main(String[] args) {
 
-		UserDAOImpl userDAOImpl=new UserDAOImpl();
-		User user =new User();
-		user.setName("jan");
-		user.setSurname("kowalski");
-		userDAOImpl.insertUser(user);
-		userDAOImpl.updateUser(1, "andrzej","test");
-		userDAOImpl.getAllUsers();
-		userDAOImpl.removeUser(1);
-		user=null;
-		userDAOImpl.findUser(1);
+
+		BookDAOImpl bookDAOimpl = new BookDAOImpl();
+		Date simpleDateFormat = null;
+
+		try {
+			simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd").parse("2010-12-12");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+
+		Book book = new Book();
+		book.setTitle("Programowania Java");
+		book.setAuthor("Jarek Browarek");
+		book.setPublished(simpleDateFormat);
+		book.setDescription("Ksiązka o programowaniu");
+		bookDAOimpl.insertBook(book);
+		bookDAOimpl.getAllBooks();
 	}
 }
+
